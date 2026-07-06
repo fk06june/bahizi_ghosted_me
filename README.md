@@ -177,7 +177,7 @@ MIT License — Utilise ce code librement pour tes projets personnels ou commerc
 
 ## 🙏 Crédits
 
-- **Design** : Créé avec l'IA (Manus)
+- **Design** : Créé avec l'IA (Claude ai)
 - **Fonts** : Google Fonts (Playfair Display, Inter)
 - **Icons** : Tabler Icons
 - **Inspiration** : Bahizi Café & Restaurant, Bujumbura, Burundi
@@ -196,6 +196,3 @@ C'est une solution viable pour les petits et moyens établissements qui veulent 
 
 **Bon développement !** ☕
 
----
-
-*Créé avec IA et caféine* ☕✨

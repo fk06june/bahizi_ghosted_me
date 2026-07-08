@@ -1,6 +1,6 @@
 # ☕ Bahizi Café & Restaurant
 
-Un site web premium pour un café/restaurant à Bujumbura, Burundi. Créé entièrement avec l'IA, ce projet démontre comment construire une présence web professionnelle sans dépendre de designers externes.
+Un site web premium pour un café/restaurant à Bujumbura. Créé entièrement avec l'IA, ce projet démontre comment construire une présence web professionnelle en utilisant  d'exemple de design déjà présent sur internet ou des sites .
 
 ## 🎯 À Propos du Projet
 

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Créer un compte Bahizi Café & Restaurant">
+  <title>Créer un compte — Bahizi Café & Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #FAF7F2 0%, #F5E6D3 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .signup-container {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      border: 1px solid rgba(201, 168, 76, 0.1);
+    }
+
+    .card-header {
+      padding: 32px 24px 24px;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #1C1C1A;
+      margin-bottom: 8px;
+    }
+
+    .card-description {
+      font-size: 14px;
+      color: #687076;
+      line-height: 1.5;
+    }
+
+    .card-content {
+      padding: 24px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-row .form-group {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1C1C1A;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      background: #FAFAFA;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #3C78C8;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(60, 120, 200, 0.1);
+    }
+
+    .password-requirements {
+      font-size: 12px;
+      color: #687076;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    .requirement {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .requirement.met {
+      color: #16A34A;
+    }
+
+    .requirement-icon {
+      width: 14px;
+      height: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    .terms-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 13px;
+      color: #687076;
+      line-height: 1.4;
+    }
+
+    .terms-checkbox input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      cursor: pointer;
+      accent-color: #3C78C8;
+    }
+
+    .terms-checkbox a {
+      color: #3C78C8;
+      text-decoration: none;
+    }
+
+    .terms-checkbox a:hover {
+      text-decoration: underline;
+    }
+
+    .error-message {
+      display: none;
+      padding: 12px;
+      background: #FEE2E2;
+      border: 1px solid #FECACA;
+      border-radius: 8px;
+      color: #991B1B;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .card-footer {
+      padding: 24px;
+      border-top: 1px solid rgba(201, 168, 76, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3C78C8 0%, #2A5BA8 100%);
+      color: white;
+      width: 100%;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(60, 120, 200, 0.3);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #1C1C1A;
+      border: 1px solid #E5E7EB;
+      width: 100%;
+    }
+
+    .btn-secondary:hover {
+      background: #FAFAFA;
+      border-color: #C9A84C;
+    }
+
+    .login-link {
+      text-align: center;
+      font-size: 14px;
+      color: #687076;
+    }
+
+    .login-link a {
+      color: #3C78C8;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .login-link a:hover {
+      color: #2A5BA8;
+    }
+
+    .loading {
+      display: none;
+    }
+
+    .loading.show {
+      display: inline-block;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      .card-header {
+        padding: 24px 16px 16px;
+      }
+
+      .card-content {
+        padding: 16px;
+      }
+
+      .card-footer {
+        padding: 16px;
+      }
+
+      .card-title {
+        font-size: 24px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="card-title">Créer un compte</h1>
+        <p class="card-description">Rejoignez Bahizi et profitez de nos services</p>
+      </div>
+
+      <div class="card-content">
+        <div class="error-message" id="errorMessage"></div>
+
+        <form id="signupForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Prénom</label>
+              <input 
+                type="text" 
+                id="firstName" 
+                name="firstName" 
+                placeholder="Jean" 
+                required
+              >
+            </div>
+            <div class="form-group">
+              <label for="lastName">Nom</label>
+              <input 
+                type="text" 
+                id="lastName" 
+                name="lastName" 
+                placeholder="Dupont" 
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="vous@exemple.com" 
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Téléphone (optionnel)</label>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone" 
+              placeholder="+257 79 22 22 22"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="••••••••" 
+              required
+              onchange="checkPasswordRequirements()"
+            >
+            <div class="password-requirements">
+              <div class="requirement" id="req-length">
+                <span class="requirement-icon">○</span>
+                Au moins 8 caractères
+              </div>
+              <div class="requirement" id="req-uppercase">
+                <span class="requirement-icon">○</span>
+                Une lettre majuscule
+              </div>
+              <div class="requirement" id="req-number">
+                <span class="requirement-icon">○</span>
+                Un chiffre
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirmer le mot de passe</label>
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              name="confirmPassword" 
+              placeholder="••••••••" 
+              required
+            >
+          </div>
+
+          <div class="terms-checkbox">
+            <input 
+              type="checkbox" 
+              id="terms" 
+              name="terms" 
+              required
+            >
+            <label for="terms" style="margin: 0;">
+              J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a>
+            </label>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn btn-primary" id="signupBtn" onclick="handleSignup()">
+          <span class="loading" id="loadingSpinner">⏳</span>
+          <span id="signupText">Créer un compte</span>
+        </button>
+        <button class="btn btn-secondary" onclick="signupWithGoogle()">
+          <i class="ti ti-brand-google"></i>
+          S'inscrire avec Google
+        </button>
+        <p class="login-link">
+          Vous avez déjà un compte ? <a href="login.html">Se connecter</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkPasswordRequirements() {
+      const password = document.getElementById('password').value;
+      const reqLength = document.getElementById('req-length');
+      const reqUppercase = document.getElementById('req-uppercase');
+      const reqNumber = document.getElementById('req-number');
+
+      // Check length
+      if (password.length >= 8) {
+        reqLength.classList.add('met');
+        reqLength.querySelector('.requirement-icon').textContent = '✓';
+      } else {
+        reqLength.classList.remove('met');
+        reqLength.querySelector('.requirement-icon').textContent = '○';
+      }
+
+      // Check uppercase
+      if (/[A-Z]/.test(password)) {
+        reqUppercase.classList.add('met');
+        reqUppercase.querySelector('.requirement-icon').textContent = '✓';
+      } else {
+        reqUppercase.classList.remove('met');
+        reqUppercase.querySelector('.requirement-icon').textContent = '○';
+      }
+
+      // Check number
+      if (/[0-9]/.test(password)) {
+        reqNumber.classList.add('met');
+        reqNumber.querySelector('.requirement-icon').textContent = '✓';
+      } else {
+        reqNumber.classList.remove('met');
+        reqNumber.querySelector('.requirement-icon').textContent = '○';
+      }
+    }
+
+    async function handleSignup() {
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const terms = document.getElementById('terms').checked;
+      const errorMessage = document.getElementById('errorMessage');
+      const signupBtn = document.getElementById('signupBtn');
+      const loadingSpinner = document.getElementById('loadingSpinner');
+      const signupText = document.getElementById('signupText');
+
+      // Validation
+      if (!firstName || !lastName || !email || !password || !confirmPassword) {
+        errorMessage.textContent = 'Veuillez remplir tous les champs obligatoires';
+        errorMessage.classList.add('show');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        errorMessage.textContent = 'Les mots de passe ne correspondent pas';
+        errorMessage.classList.add('show');
+        return;
+      }
+
+      if (password.length < 8) {
+        errorMessage.textContent = 'Le mot de passe doit contenir au moins 8 caractères';
+        errorMessage.classList.add('show');
+        return;
+      }
+
+      if (!terms) {
+        errorMessage.textContent = 'Vous devez accepter les conditions d\'utilisation';
+        errorMessage.classList.add('show');
+        return;
+      }
+
+      // Show loading state
+      signupBtn.disabled = true;
+      loadingSpinner.classList.add('show');
+      signupText.textContent = 'Création en cours...';
+      errorMessage.classList.remove('show');
+
+      try {
+        const response = await fetch('/api/users/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            first_name: firstName,
+            last_name: lastName,
+            phone
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Store token
+          localStorage.setItem('authToken', data.token);
+          localStorage.setItem('userId', data.user.id);
+          localStorage.setItem('userName', data.user.first_name);
+
+          // Redirect to menu
+          window.location.href = '/menu.html';
+        } else {
+          errorMessage.textContent = data.error || 'Erreur lors de la création du compte';
+          errorMessage.classList.add('show');
+        }
+      } catch (error) {
+        errorMessage.textContent = 'Erreur de connexion. Veuillez réessayer.';
+        errorMessage.classList.add('show');
+        console.error('Signup error:', error);
+      } finally {
+        signupBtn.disabled = false;
+        loadingSpinner.classList.remove('show');
+        signupText.textContent = 'Créer un compte';
+      }
+    }
+
+    function signupWithGoogle() {
+      alert('Inscription Google - À implémenter');
+    }
+
+    // Real-time password requirements check
+    document.getElementById('password').addEventListener('input', checkPasswordRequirements);
+  </script>
+</body>
+</html>

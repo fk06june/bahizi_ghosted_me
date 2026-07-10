@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Connexion à votre compte Bahizi Café & Restaurant">
+  <title>Connexion — Bahizi Café & Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #FAF7F2 0%, #F5E6D3 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      border: 1px solid rgba(201, 168, 76, 0.1);
+    }
+
+    .card-header {
+      padding: 32px 24px 24px;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #1C1C1A;
+      margin-bottom: 8px;
+    }
+
+    .card-description {
+      font-size: 14px;
+      color: #687076;
+      line-height: 1.5;
+    }
+
+    .card-content {
+      padding: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1C1C1A;
+      margin-bottom: 8px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      background: #FAFAFA;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #3C78C8;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(60, 120, 200, 0.1);
+    }
+
+    .forgot-password {
+      text-align: right;
+      margin-top: -8px;
+      margin-bottom: 20px;
+    }
+
+    .forgot-password a {
+      font-size: 13px;
+      color: #3C78C8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .forgot-password a:hover {
+      color: #2A5BA8;
+    }
+
+    .card-footer {
+      padding: 24px;
+      border-top: 1px solid rgba(201, 168, 76, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3C78C8 0%, #2A5BA8 100%);
+      color: white;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(60, 120, 200, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #1C1C1A;
+      border: 1px solid #E5E7EB;
+      width: 100%;
+    }
+
+    .btn-secondary:hover {
+      background: #FAFAFA;
+      border-color: #C9A84C;
+    }
+
+    .signup-link {
+      text-align: center;
+      font-size: 14px;
+      color: #687076;
+    }
+
+    .signup-link a {
+      color: #3C78C8;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .signup-link a:hover {
+      color: #2A5BA8;
+    }
+
+    .error-message {
+      display: none;
+      padding: 12px;
+      background: #FEE2E2;
+      border: 1px solid #FECACA;
+      border-radius: 8px;
+      color: #991B1B;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .loading {
+      display: none;
+    }
+
+    .loading.show {
+      display: inline-block;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      .card-header {
+        padding: 24px 16px 16px;
+      }
+
+      .card-content {
+        padding: 16px;
+      }
+
+      .card-footer {
+        padding: 16px;
+      }
+
+      .card-title {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="card-title">Connexion</h1>
+        <p class="card-description">Entrez vos identifiants pour accéder à votre compte</p>
+      </div>
+
+      <div class="card-content">
+        <div class="error-message" id="errorMessage"></div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="vous@exemple.com" 
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="••••••••" 
+              required
+            >
+            <div class="forgot-password">
+              <a href="#">Mot de passe oublié ?</a>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn btn-primary" id="loginBtn" onclick="handleLogin()">
+          <span class="loading" id="loadingSpinner">⏳</span>
+          <span id="loginText">Se connecter</span>
+        </button>
+        <button class="btn btn-secondary" onclick="loginWithGoogle()">
+          <i class="ti ti-brand-google"></i>
+          Se connecter avec Google
+        </button>
+        <p class="signup-link">
+          Pas encore de compte ? <a href="signup.html">Créer un compte</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function handleLogin() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('errorMessage');
+      const loginBtn = document.getElementById('loginBtn');
+      const loadingSpinner = document.getElementById('loadingSpinner');
+      const loginText = document.getElementById('loginText');
+
+      // Validation
+      if (!email || !password) {
+        errorMessage.textContent = 'Veuillez remplir tous les champs';
+        errorMessage.classList.add('show');
+        return;
+      }
+
+      // Show loading state
+      loginBtn.disabled = true;
+      loadingSpinner.classList.add('show');
+      loginText.textContent = 'Connexion en cours...';
+      errorMessage.classList.remove('show');
+
+      try {
+        const response = await fetch('/api/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Store token
+          localStorage.setItem('authToken', data.token);
+          localStorage.setItem('userId', data.user.id);
+          localStorage.setItem('userName', data.user.first_name);
+
+          // Redirect to menu
+          window.location.href = '/menu.html';
+        } else {
+          errorMessage.textContent = data.error || 'Identifiants invalides';
+          errorMessage.classList.add('show');
+        }
+      } catch (error) {
+        errorMessage.textContent = 'Erreur de connexion. Veuillez réessayer.';
+        errorMessage.classList.add('show');
+        console.error('Login error:', error);
+      } finally {
+        loginBtn.disabled = false;
+        loadingSpinner.classList.remove('show');
+        loginText.textContent = 'Se connecter';
+      }
+    }
+
+    function loginWithGoogle() {
+      alert('Connexion Google - À implémenter');
+    }
+
+    // Allow Enter key to submit
+    document.getElementById('loginForm').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleLogin();
+      }
+    });
+  </script>
+</body>
+</html>

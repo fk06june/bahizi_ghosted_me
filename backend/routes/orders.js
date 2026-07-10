@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../config/database');
 const { authenticateToken } = require('../middleware/auth');
+const emailService = require('../services/emailService');
 const router = express.Router();
 
 // Create order
@@ -15,12 +16,20 @@ router.post('/', authenticateToken, async (req, res) => {
 
     // Calculate total
     let total_amount = 0;
+    const orderItems = [];
+    
     for (const item of items) {
-      const productResult = await pool.query('SELECT price FROM products WHERE id = $1', [item.product_id]);
+      const productResult = await pool.query('SELECT price, name FROM products WHERE id = $1', [item.product_id]);
       if (productResult.rows.length === 0) {
         return res.status(404).json({ error: `Product ${item.product_id} not found` });
       }
-      total_amount += productResult.rows[0].price * item.quantity;
+      const price = productResult.rows[0].price;
+      total_amount += price * item.quantity;
+      orderItems.push({
+        name: productResult.rows[0].name,
+        quantity: item.quantity,
+        price: price
+      });
     }
 
     // Create order
@@ -38,6 +47,32 @@ router.post('/', authenticateToken, async (req, res) => {
       await pool.query(
         'INSERT INTO order_items (order_id, product_id, quantity, price) VALUES ($1, $2, $3, $4)',
         [order_id, item.product_id, item.quantity, productResult.rows[0].price]
+      );
+    }
+
+    // Get user email and name
+    const userResult = await pool.query(
+      'SELECT email, first_name FROM users WHERE id = $1',
+      [user_id]
+    );
+
+    if (userResult.rows.length > 0) {
+      const user = userResult.rows[0];
+      // Send confirmation email to customer
+      await emailService.sendOrderConfirmation(
+        user.email,
+        user.first_name,
+        orderItems,
+        total_amount,
+        order_id
+      );
+      // Send notification to restaurant
+      await emailService.sendOrderNotificationToRestaurant(
+        user.first_name,
+        user.email,
+        orderItems,
+        total_amount,
+        order_id
       );
     }
 

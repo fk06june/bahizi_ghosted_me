@@ -1,0 +1,189 @@
+/* ============================================================
+   HERO SECTION — Correction complète
+   Approche Blue Bottle : photo cover pour scènes, 
+   split layout pour produits sur fond blanc
+   ============================================================ */
+
+.hero {
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+  background: #1C1C1A;
+}
+
+.hero-slides {
+  display: flex;
+  height: 100%;
+  transition: transform .7s cubic-bezier(.4, 0, .2, 1);
+  will-change: transform;
+}
+
+.hero-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+/* ---- Slide type 1 : SCÈNE (waffles) — cover pleine largeur ---- */
+.hero-slide--scene .slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transform: scale(1.02); /* évite les bords blancs au transition */
+}
+
+.hero-slide--scene .slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 13, 10, .85) 0%,
+    rgba(15, 13, 10, .55) 40%,
+    rgba(15, 13, 10, .10) 70%,
+    rgba(15, 13, 10, 0)   100%
+  );
+}
+
+/* ---- Slide type 2 : PRODUIT (sachet, milkshake) ---- */
+/* Fond sombre à gauche + produit à droite, pas d'étirement */
+.hero-slide--product {
+  background: #1C1C1A;
+}
+
+.hero-slide--product .slide-product-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 52%;
+  height: 100%;
+  background-size: contain;
+  background-position: center right;
+  background-repeat: no-repeat;
+  /* Pas de fond blanc — image sur fond sombre */
+}
+
+/* Dégradé qui fond le produit dans le fond sombre */
+.hero-slide--product .slide-product-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #1C1C1A 0%,
+    rgba(28, 28, 26, .6) 30%,
+    rgba(28, 28, 26, 0) 60%
+  );
+}
+
+/* ---- Contenu texte commun ---- */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 56px 52px;
+  max-width: 520px;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .6);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+
+.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 46px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 16px;
+  letter-spacing: -.02em;
+}
+
+.hero-h1 em {
+  font-style: italic;
+  color: #C9A84C;
+}
+
+.hero-sub {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, .78);
+  margin-bottom: 26px;
+  font-weight: 300;
+  max-width: 400px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: #1C1C1A;
+  border: none;
+  padding: 13px 26px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background .2s, color .2s;
+}
+
+.hero-cta:hover {
+  background: #3C78C8;
+  color: #fff;
+}
+
+/* ---- Dots ---- */
+.hero-dots {
+  position: absolute;
+  bottom: 24px;
+  right: 40px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.hero-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .35);
+  cursor: pointer;
+  border: none;
+  transition: background .2s, width .2s;
+  padding: 0;
+}
+
+.hero-dot.active {
+  background: #fff;
+  width: 20px;
+  border-radius: 3px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .hero { height: 500px; }
+  .hero-content { padding: 0 28px 36px; max-width: 100%; }
+  .hero-h1 { font-size: 32px; }
+  .hero-sub { font-size: 13px; max-width: 100%; }
+  .hero-slide--product .slide-product-img { width: 60%; opacity: .5; }
+}
+
+@media (max-width: 480px) {
+  .hero { height: 420px; }
+  .hero-content { padding: 0 20px 28px; }
+  .hero-h1 { font-size: 26px; }
+  .hero-eyebrow { font-size: 10px; }
+  .hero-cta { padding: 11px 20px; font-size: 12px; }
+  .hero-slide--product .slide-product-img { width: 70%; opacity: .35; }
+  .hero-dots { right: 20px; bottom: 14px; }
+}

@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "buildCommand": "echo 'Building static site'",
+  "outputDirectory": ".",
+  "framework": "static",
+  "env": {
+    "PORT": "3000"
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
